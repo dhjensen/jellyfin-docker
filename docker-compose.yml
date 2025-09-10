@@ -1,0 +1,29 @@
+name: Jellyfin
+
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:${JELLYFIN_VERSION}
+    container_name: jellyfin
+    volumes:
+      - /home/dhjensen/Videos:/media:ro
+      - /etc/timezone:/etc/timezone:ro
+      - jellyfin_config:/config:rw
+      - jellyfin_cache:/cache:rw
+    environment:
+      - JELLYFIN_PublishedServerUrl=${JELLYFIN_PUBLISHEDSERVERURL}
+    ports:
+      - "127.0.0.1:8096:8096"
+    networks:
+      - nginx-proxy-manager_frontend
+    restart: unless-stopped
+    labels:
+      - wud.tag.include=^\d+\.\d+\.\d+$$
+
+networks:
+  nginx-proxy-manager_frontend:
+    driver: bridge
+    external: true
+
+volumes:
+  jellyfin_config:
+  jellyfin_cache:
