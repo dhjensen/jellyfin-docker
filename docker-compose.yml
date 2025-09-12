@@ -5,16 +5,22 @@ services:
     image: jellyfin/jellyfin:${JELLYFIN_VERSION}
     container_name: jellyfin
     volumes:
-      - /home/dhjensen/Videos:/media:ro
+      - ~/Videos:/media:ro
       - /etc/timezone:/etc/timezone:ro
       - jellyfin_config:/config:rw
       - jellyfin_cache:/cache:rw
     environment:
       - JELLYFIN_PublishedServerUrl=${JELLYFIN_PUBLISHEDSERVERURL}
-    network_mode: host
+    networks:
+      - nginx-proxy-manager_frontend
     restart: unless-stopped
     labels:
       - wud.tag.include=^\d+\.\d+\.\d+$$
+
+networks:
+  nginx-proxy-manager_frontend:
+    driver: bridge
+    external: true
 
 volumes:
   jellyfin_config:
