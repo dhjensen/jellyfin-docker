@@ -5,7 +5,7 @@ services:
     image: jellyfin/jellyfin:${JELLYFIN_VERSION}
     container_name: jellyfin
     volumes:
-      - ~/Videos:/media:ro
+      - ~/Videos:/media:rw
       - /etc/timezone:/etc/timezone:ro
       - jellyfin_config:/config:rw
       - jellyfin_cache:/cache:rw
