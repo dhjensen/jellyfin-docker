@@ -16,6 +16,8 @@ services:
     restart: unless-stopped
     labels:
       - wud.tag.include=^\d+\.\d+\.\d+$$
+      - traefik.enable=true
+      - traefik.http.routers.jellyfin-jellyfin.rule=Host(`jellyfin.dhjensen.tech`)
 
 networks:
   nginx-proxy-manager_frontend:
