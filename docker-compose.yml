@@ -12,19 +12,13 @@ services:
     environment:
       - JELLYFIN_PublishedServerUrl=${JELLYFIN_PUBLISHEDSERVERURL}
     networks:
-      - nginx-proxy-manager_frontend
       - backend
     restart: unless-stopped
     labels:
       - wud.tag.include=^\d+\.\d+\.\d+$$
       - traefik.enable=true
-      - traefik.http.routers.jellyfin-jellyfin.rule=Host(`jellyfin.dhjensen.tech`)
-      - traefik.http.routers.jellyfin-jellyfin.middlewares=ipallowlocal@docker
 
 networks:
-  nginx-proxy-manager_frontend:
-    driver: bridge
-    external: true
   backend:
     external: true
     driver: bridge
