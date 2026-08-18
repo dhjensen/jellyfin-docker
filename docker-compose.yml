@@ -6,6 +6,7 @@ services:
     container_name: jellyfin
     volumes:
       - ~/Videos:/media:rw
+      - /mnt/media/series:/media/series:rw
       - /etc/timezone:/etc/timezone:ro
       - jellyfin_config:/config:rw
       - jellyfin_cache:/cache:rw
